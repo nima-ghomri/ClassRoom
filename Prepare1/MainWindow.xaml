@@ -2,17 +2,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Prepare1"
-        mc:Ignorable="d" Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="MainWindow"
+        Height="450" Width="800" DataContext="{StaticResource MainDataContext}">
     <StackPanel>
-        <Label Content="Student Information" FontWeight="Bold"/>
+        <Label Content="Student Information" FontWeight="Bold" />
         <Label Content="First Name" FontWeight="Bold" />
-        <TextBox x:Name="firstNameTextBox" TextChanged="firstNameTextBox_TextChanged"/>
-        <Button x:Name="clearFirstNameButton" Content="Clear First Name" Click="clearFirstNameButton_Click"/>
-        <Label Content="Last Name" FontWeight="Bold"/>
-        <TextBox x:Name="lastNameTextBox" TextChanged="lastNameTextBox_TextChanged"/>
-        <Button x:Name="clearLastNameButton" Content="Clear Last Name" Click="clearLastNameButton_Click"/>
+        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+        <Button x:Name="clearFirstNameButton" Content="Clear First Name"  />
+        <Label Content="Last Name" FontWeight="Bold" />
+        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+        <Button x:Name="clearLastNameButton" Content="Clear Last Name"/>
         <Label Content="Full Name" FontWeight="Bold" />
-        <TextBlock x:Name="fullNameTextBlock" />
-        <Button x:Name="clearAllNameButton" Content="Clear All" Click="clearAllNameButton_Click" />
+        <TextBlock Text="{Binding FullName}" />
+        <Button x:Name="clearAllNameButton" Content="Clear All" Command="{x:Static ApplicationCommands.Copy}" />
     </StackPanel>
 </Window>
