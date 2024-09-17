@@ -2,18 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Session1"
-        DataContext="{StaticResource DefaultDataContext}"
-        mc:Ignorable="d" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="{Binding FirstName}">
-    <StackPanel>
-        <Label Content="First Name" />
-        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
-        <Button >Clear First Name</Button>
-        <Label Content="Last Name" />
-        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
-        <Button x:Name="lastNameClear" >Clear Last Name</Button>
-        <Label Content="Full Name" />
-        <TextBlock Text="{Binding FullName}" />
-        <Button x:Name="clearAllButton">Clear All</Button>
-    </StackPanel>
+        DataContext="{StaticResource MainWindowViewModel}" mc:Ignorable="d" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
+    <DockPanel>
+        <local:PanelView DockPanel.Dock="Right" DataContext="{Binding Panel}"/>
+        <local:PersonView DataContext="{Binding Person}"/>
+    </DockPanel>
 </Window>
