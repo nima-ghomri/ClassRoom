@@ -1,42 +1,19 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Session1;
 
-public class MainWindowViewModel : BaseViewModel
+public partial class MainWindowViewModel : ObservableObject
 {
-    private string firstName;
-    private string lastName;
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(FullName))]
+    string firstName;
 
-    public string FirstName
+    partial void OnFirstNameChanged(string? oldValue, string newValue)
     {
-        get => firstName; set
-        {
-            firstName = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(FullName));
-        }
+
     }
 
-    public string LastName
-    {
-        get => lastName; set
-        {
-            lastName = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(FullName));
-        }
-    }
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(FullName))]
+    string lastName;
 
     public string FullName => $"{FirstName} {LastName}";
-}
-
-public abstract class BaseViewModel : INotifyPropertyChanged
-{
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 }
