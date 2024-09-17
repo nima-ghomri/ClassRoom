@@ -2,16 +2,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Session1"
-        mc:Ignorable="d" Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="{Binding FirstName}">
     <StackPanel>
         <Label Content="First Name" />
-        <TextBox x:Name="firstNameTextBox" TextChanged="firstNameTextBox_TextChanged"/>
-        <Button Click="Button_Click">Clear First Name</Button>
+        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
+        <Button >Clear First Name</Button>
         <Label Content="Last Name" />
-        <TextBox x:Name="lastNameTextBox" TextChanged="lastNameTextBox_TextChanged"/>
-        <Button x:Name="lastNameClear" Click="lastNameClear_Click">Clear Last Name</Button>
+        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
+        <Button x:Name="lastNameClear" >Clear Last Name</Button>
         <Label Content="Full Name" />
-        <TextBlock x:Name="fullNameTextBlock" />
-        <Button x:Name="clearAllButton" Click="clearAllButton_Click">Clear All</Button>
+        <TextBlock Text="{Binding FullName}" />
+        <Button x:Name="clearAllButton">Clear All</Button>
     </StackPanel>
 </Window>

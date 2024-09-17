@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,46 +10,47 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Session1
+namespace Session1;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        DataContext = new MainWindowViewModel();
+        InitializeComponent();
+    }
+}
 
-        private void firstNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            fullNameTextBlock.Text = $"{firstNameTextBox.Text} {lastNameTextBox.Text}";
-            fullNameTextBlock.Background = Brushes.Red;
-            this.Title = fullNameTextBlock.Text;
-        }
+public class MainWindowViewModel : INotifyPropertyChanged
+{
+    private string firstName;
+    private string lastName;
 
-        private void lastNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    public string FirstName
+    {
+        get => firstName; set
         {
-            fullNameTextBlock.Text = $"{firstNameTextBox.Text} {lastNameTextBox.Text}";
-            this.Title = fullNameTextBlock.Text;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            firstNameTextBox.Text = "";
-        }
-
-        private void lastNameClear_Click(object sender, RoutedEventArgs e)
-        {
-            lastNameTextBox.Text = "";
-        }
-
-        private void clearAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            firstNameTextBox.Text = "";
-            lastNameTextBox.Text = "";
-            fullNameTextBlock.Text = "";
+            firstName = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FirstName)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullName)));
         }
     }
+
+    public string LastName
+    {
+        get => lastName; set
+        {
+            lastName = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LastName)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FullName)));
+        }
+    }
+
+    public string FullName => $"{FirstName} {LastName}";
+
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }
