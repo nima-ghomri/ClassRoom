@@ -9,5 +9,7 @@ namespace Session1
 {
     public partial class PanelViewModel : ObservableObject
     {
+        [ObservableProperty]
+        bool isOpen = true;
     }
 }

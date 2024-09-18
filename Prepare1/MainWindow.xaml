@@ -5,6 +5,7 @@
         mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="MainWindow"
         Height="450" Width="800" DataContext="{StaticResource MainDataContext}">
     <StackPanel>
+        
         <Label Content="Student Information" FontWeight="Bold" />
         <Label Content="First Name" FontWeight="Bold" />
         <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />

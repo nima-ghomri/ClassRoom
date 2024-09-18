@@ -5,6 +5,7 @@
         DataContext="{StaticResource MainWindowViewModel}" mc:Ignorable="d" Height="450" Width="800"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
     <DockPanel>
+        <Label Content="{Binding Panel.IsOpen}" />
         <local:PanelView DockPanel.Dock="Right" DataContext="{Binding Panel}"/>
         <local:PersonView DataContext="{Binding Person}"/>
     </DockPanel>
