@@ -2,11 +2,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Session1"
-        d:DataContext="{d:DesignInstance Type=local:PanelViewModel}" Width="200" mc:Ignorable="d" d:DesignHeight="450"
+        d:DataContext="{d:DesignInstance Type=local:PanelViewModel}" Width="200" mc:Ignorable="d" d:DesignHeight="1920"
         d:DesignWidth="800">
-    <StackPanel>
+    <DockPanel>
+        <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedPerson}" DockPanel.Dock="Top" Height="100">Remove</Button>
         <Expander IsExpanded="{Binding IsOpen, Mode=TwoWay}" Background="Bisque">
-            <Label Content="content" />
+            <ListView ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
+                <d:ListView.ItemsSource>
+                    <CompositeCollection>
+                        <local:PersonViewModel FirstName="Nima" LastName="Ghomri"/>
+                    </CompositeCollection>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="local:PersonViewModel">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding FirstName}"/>
+                            <Label Content="{Binding LastName}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Expander>
-    </StackPanel>
+    </DockPanel>
 </UserControl>
