@@ -14,6 +14,7 @@ Talk about the overall purpose of the MVVM design pattern, and of its implementa
 
 Commands in mvvm.
 
+* Observable collections, Binding to collections (ItemsSource) and INotifyCollectionChanged
 * ICommand interface review and implementation.
 * Execute and CanExecute methods.
 * RelayCommand Implementation.
@@ -24,7 +25,6 @@ Commands in mvvm.
 
 * Styles
 * Template
-* Observable collections, Binding to collections (ItemsSource) and INotifyCollectionChanged
 * ItemsControl's ItemTemplate
 * Dependency property
 * Attached property
