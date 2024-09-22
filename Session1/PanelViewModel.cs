@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Session1
@@ -19,42 +22,54 @@ namespace Session1
         [ObservableProperty]
         PersonViewModel selectedPerson;
 
-        public ICommand RemoveCommand { get; set; }
+        [ObservableProperty, NotifyCanExecuteChangedFor(nameof(RemovePersonCommand))]
+        bool flag;
+
         public PanelViewModel()
         {
-            RemoveCommand = new RemovePersonCommand(People);
+
         }
 
         [RelayCommand]
-         void RemovePerson(PersonViewModel person)
+        void ToggleFlag()
+        {
+            Flag = !Flag;
+        }
+
+        [RelayCommand(CanExecute = nameof(CanRemovePerson))]
+        void RemovePerson(PersonViewModel person)
         {
             People.Remove(person);
         }
+
+        bool CanRemovePerson(PersonViewModel person)
+        {
+            return person is PersonViewModel && flag;
+        }
     }
 
-
-
-
-
-    internal class RemovePersonCommand : ICommand
+    public class ConcatConverter : IMultiValueConverter
     {
-        private ObservableCollection<PersonViewModel> people;
-
-        public RemovePersonCommand(ObservableCollection<PersonViewModel> people)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            this.people = people;
+            return string.Join((parameter as string)??" ", values);
         }
 
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object? parameter)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            return parameter is PersonViewModel && people.Count > 1;
+            return value is string text ? text.Split((parameter as string) ?? " ").ToArray() : [];
+        }
+    }
+    public class NullableToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is null ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        public void Execute(object? parameter)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            people.Remove((PersonViewModel)parameter!);
+            return Binding.DoNothing;
         }
     }
 }

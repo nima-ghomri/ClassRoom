@@ -4,8 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Session1"
         d:DataContext="{d:DesignInstance Type=local:PanelViewModel}" Width="200" mc:Ignorable="d" d:DesignHeight="1920"
         d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:NullableToVisibilityConverter x:Key="NullableToVisibilityConverter"/>
+        <local:ConcatConverter x:Key="ConcatConverter"/>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{x:Static ApplicationCommands.Save}" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute"/>
+    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}" Key="Delete"/>
+    </UserControl.InputBindings>
     <DockPanel>
-        <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedPerson}" DockPanel.Dock="Top" Height="100">Remove</Button>
+        <Button Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}" DockPanel.Dock="Top" Height="100">Remove</Button>
+        <Button Command="{Binding ToggleFlagCommand}" DockPanel.Dock="Top" Height="100">Toggle Flag</Button>
+        <Label Background="Yellow" d:Content="Nima Ghomri" Visibility="{Binding SelectedPerson, Converter={StaticResource NullableToVisibilityConverter}}" DockPanel.Dock="Top" Content="{Binding SelectedPerson.FullName}"/>
+        <Label Background="Red" d:Content="Nima Ghomri" DockPanel.Dock="Top">
+            <Label.Content>
+                <MultiBinding Converter="{StaticResource ConcatConverter}" ConverterParameter="*">
+                    <Binding Path="SelectedPerson.FirstName" />
+                    <Binding Path="SelectedPerson.LastName" />
+                </MultiBinding>
+            </Label.Content>
+        </Label>
         <Expander IsExpanded="{Binding IsOpen, Mode=TwoWay}" Background="Bisque">
             <ListView ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
                 <d:ListView.ItemsSource>
