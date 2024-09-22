@@ -11,15 +11,17 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         var publisher = new Publisher();
+        var subscriber = new Subscriber();
+        publisher.OnRun += subscriber.Action;
         publisher.Run();
     }
 
     public class Publisher
     {
-        public Subscriber Subscriber { get; set; }
+        public event Action OnRun;
         public void Run()
         {
-            Subscriber.Action();
+            OnRun?.Invoke();
         }
     }
 
