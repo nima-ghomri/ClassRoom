@@ -18,7 +18,7 @@ public partial class MainWindowViewModel : ObservableObject
     public ObservableCollection<PersonViewModel> People { get; set; } = [];
     public MainWindowViewModel()
     {
-        AddPersonCommand = new AddCommand(People);
+        AddPersonCommand = new AddCommand(People); 
     }
 
     [ObservableProperty]
