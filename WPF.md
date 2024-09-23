@@ -30,7 +30,8 @@ Commands in mvvm.
 * ItemsControl's ItemTemplate
 * Dependency property
 * Attached property
-* DataTrigger, Trigger
+* DataTrigger
+* Triggers (property triggers, event triggers, data triggers)
 
 ## Session 4
 
@@ -38,9 +39,4 @@ Commands in mvvm.
 * Custom Control
 * Behavior
 * IMessenger, ObservableRecipient
-
-## Session 5
-
-* Triggers (property triggers, event triggers, data triggers)
-* behaviors
 * Visual state management and control states
