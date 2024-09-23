@@ -23,16 +23,18 @@ Commands in mvvm.
 
 ## Session 3
 
+* b:Interactions, Bind commands to events
+* User Control
 * Styles
 * Template
 * ItemsControl's ItemTemplate
 * Dependency property
 * Attached property
+* DataTrigger
 
 ## Session 4
 
 * DataTemplate, DataTemplateSelector
-* User Control
 * Custom Control
 * Behavior
 * IMessenger, ObservableRecipient

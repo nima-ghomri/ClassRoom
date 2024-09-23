@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Prepare1"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:local="clr-namespace:Prepare1"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="MainWindow"
         Height="450" Width="800" DataContext="{StaticResource MainDataContext}">
     <Window.CommandBindings>
@@ -10,13 +11,22 @@
         </CommandBinding>
     </Window.CommandBindings>
     <StackPanel>
+        <Path Stroke="Black" Fill="LightBlue" StrokeThickness="2" Width="200" Height="200">
+            <Path.Data>
+                <GeometryGroup>
+                    <!-- Define path data directly as Geometry -->
+                    <PathGeometry
+                            Figures="M3 13.6493C3 16.6044 5.41766 19 8.4 19L16.5 19C18.9853 19 21 16.9839 21 14.4969C21 12.6503 19.8893 10.9449 18.3 10.25C18.1317 7.32251 15.684 5 12.6893 5C10.3514 5 8.34694 6.48637 7.5 8.5C4.8 8.9375 3 11.2001 3 13.6493Z" />
+                </GeometryGroup>
+            </Path.Data>
+        </Path>
         <ListView ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
             <ListView.InputBindings>
                 <KeyBinding Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}"
                         Key="Delete" />
             </ListView.InputBindings>
         </ListView>
-        <Button Command="{Binding AddPersonCommand}">Add</Button>
+        <Button Command="{Binding AddPersonCommand}" local:ButtonAttachedProperties.IsHighlighted="True">Add</Button>
         <Button Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}">Remove</Button>
         <Button Command="{Binding RemoveAllCommand}">Remove all</Button>
         <Button Command="{Binding ChangeFlagCommand}">Change Flag</Button>
