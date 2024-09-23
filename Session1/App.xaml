@@ -5,7 +5,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <local:MainWindowViewModel x:Key="MainWindowViewModel" />
-        <Style TargetType="Label">
+        <!--<Style TargetType="Label">
+            <Setter Property="Background" Value="Red" />
             <Style.Triggers>
                 <Trigger Property="local:LabelAttachedProperties.IsHighlighted" Value="True">
                     <Setter Property="Background">
@@ -15,6 +16,6 @@
                     </Setter>
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
     </Application.Resources>
 </Application>
