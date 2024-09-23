@@ -45,10 +45,7 @@
                 </d:ListView.ItemsSource>
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="local:PersonViewModel">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding FirstName}"/>
-                            <Label Content="{Binding LastName}" FontWeight="Bold"/>
-                        </StackPanel>
+                        <local:PersonItemView FirstName="{Binding FirstName}" LastName="{Binding LastName}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

@@ -5,5 +5,16 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <local:MainWindowViewModel x:Key="MainWindowViewModel" />
+        <Style TargetType="Label">
+            <Style.Triggers>
+                <Trigger Property="local:LabelAttachedProperties.IsHighlighted" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Yellow" Opacity="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

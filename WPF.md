@@ -30,7 +30,7 @@ Commands in mvvm.
 * ItemsControl's ItemTemplate
 * Dependency property
 * Attached property
-* DataTrigger
+* DataTrigger, Trigger
 
 ## Session 4
 

@@ -16,7 +16,7 @@ namespace Session1
         public ObservableCollection<PersonViewModel> People { get; set; } =
             [
                 new() { FirstName = "Nima", LastName = "Ghomri" },
-                new() { FirstName = "Vahid", LastName = "Borhani" },
+                new() { FirstName = "Vahid", LastName = "Borhani", Married = true },
             ];
 
         [ObservableProperty]

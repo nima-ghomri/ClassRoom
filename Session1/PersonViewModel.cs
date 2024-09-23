@@ -16,4 +16,7 @@ public partial class PersonViewModel : ObservableObject
     string lastName;
 
     public string FullName => $"{FirstName} {LastName}";
+
+    [ObservableProperty]
+    bool married;
 }
