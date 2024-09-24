@@ -18,7 +18,7 @@ public partial class MainWindowViewModel : ObservableObject
     public ObservableCollection<PersonViewModel> People { get; set; } = [];
     public MainWindowViewModel()
     {
-        AddPersonCommand = new AddCommand(People); 
+        AddPersonCommand = new AddCommand(People);
     }
 
     [ObservableProperty]
@@ -43,6 +43,12 @@ public partial class MainWindowViewModel : ObservableObject
     void RemoveAll()
     {
         People.Clear();
+    }
+
+    [RelayCommand]
+    void AddEmployee()
+    {
+        People.Add(new EmployeeViewModel { FirstName = "John", LastName = "Smith", Job = ".Net Developer" });
     }
 
     public ICommand AddPersonCommand { get; }
@@ -86,4 +92,14 @@ public partial class PersonViewModel : ObservableObject
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
+}
+
+public partial class EmployeeViewModel : PersonViewModel
+{
+    public string Job { get; set; }
+}
+
+public partial class CustomerViewModel : PersonViewModel
+{
+    public long Balance { get; set; }
 }

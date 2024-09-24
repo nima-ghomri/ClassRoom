@@ -32,11 +32,11 @@ Commands in mvvm.
 * Attached property
 * DataTrigger
 * Triggers (property triggers, event triggers, data triggers)
+* Custom Control
 
 ## Session 4
 
 * DataTemplate, DataTemplateSelector
-* Custom Control
 * Behavior
 * IMessenger, ObservableRecipient
 * Visual state management and control states

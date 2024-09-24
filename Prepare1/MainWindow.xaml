@@ -2,15 +2,82 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:local="clr-namespace:Prepare1"
-        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="MainWindow"
-        Height="450" Width="800" DataContext="{StaticResource MainDataContext}">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Prepare1"
+        xmlns:beh="clr-namespace:Prepare1.Behaviors" mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}" Title="MainWindow" Height="450" Width="800"
+        DataContext="{StaticResource MainDataContext}">
+
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static ApplicationCommands.Save}" >
+        <CommandBinding Command="{x:Static ApplicationCommands.Save}">
         </CommandBinding>
     </Window.CommandBindings>
     <StackPanel>
+        <TextBox Text="1234444">
+            <b:Interaction.Behaviors>
+                <beh:SelectAllTextOnFocusBehavior />
+            </b:Interaction.Behaviors>
+        </TextBox>
+        <ItemsControl ItemsSource="{Binding People}">
+            <!-- The DataTemplates defined in Window.Resources will be applied automatically -->
+        </ItemsControl>
+        <ListView ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
+            <ListView.Resources>
+                <DataTemplate DataType="local:EmployeeViewModel">
+                    <StackPanel>
+                        <Label Content="{Binding FirstName}" />
+                        <Label Content="{Binding LastName}" />
+                        <Label Content="{Binding Job}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.Resources>
+            <ListView.InputBindings>
+                <KeyBinding Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}"
+                        Key="Delete" />
+            </ListView.InputBindings>
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="local:PersonViewModel">
+                    <StackPanel>
+                        <Label Content="{Binding FirstName}" />
+                        <Label Content="{Binding LastName}" />
+                        <Label Content="{Binding Job}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Rectangle Name="rect" Width="100" Height="100" MouseEnter="rect_MouseEvent" MouseLeave="rect_MouseEvent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="MouseStates">
+                    <VisualState Name="MouseEnter">
+                        <Storyboard>
+                            <ColorAnimation To="Green" Storyboard.TargetName="rectBrush"
+                                    Storyboard.TargetProperty="Color" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState Name="MouseLeave">
+                        <Storyboard>
+                            <ColorAnimation To="Red" Storyboard.TargetName="rectBrush" Storyboard.TargetProperty="Color" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition To="MouseLeave" GeneratedDuration="00:00:00.5">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <ExponentialEase EasingMode="EaseOut" Exponent="10" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition To="MouseEnter" GeneratedDuration="00:00:00.5">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <ExponentialEase EasingMode="EaseOut" Exponent="10" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="rectBrush" Color="Red" />
+            </Rectangle.Fill>
+        </Rectangle>
+
         <Path Stroke="Black" Fill="LightBlue" StrokeThickness="2" Width="200" Height="200">
             <Path.Data>
                 <GeometryGroup>
@@ -20,12 +87,7 @@
                 </GeometryGroup>
             </Path.Data>
         </Path>
-        <ListView ItemsSource="{Binding People}" SelectedItem="{Binding SelectedPerson}">
-            <ListView.InputBindings>
-                <KeyBinding Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}"
-                        Key="Delete" />
-            </ListView.InputBindings>
-        </ListView>
+        <Button Command="{Binding AddEmployeeCommand}" local:ButtonAttachedProperties.IsHighlighted="True">Add employee</Button>
         <Button Command="{Binding AddPersonCommand}" local:ButtonAttachedProperties.IsHighlighted="True">Add</Button>
         <Button Command="{Binding RemovePersonCommand}" CommandParameter="{Binding SelectedPerson}">Remove</Button>
         <Button Command="{Binding RemoveAllCommand}">Remove all</Button>

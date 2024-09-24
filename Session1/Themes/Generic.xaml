@@ -1,25 +1,28 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Session1">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Session1">
 
 
     <Style TargetType="{x:Type local:DialButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Margin" Value="5" />
         <Setter Property="FontSize" Value="20" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Template">
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="ContentTemplate">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:DialButton}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <ContentPresenter HorizontalAlignment="Center"/>
-                            <Label Content="{Binding RelativeSource={RelativeSource AncestorType=local:DialButton}, Path=Letters}"/>
+                <DataTemplate>
+                    <Border>
+                        <StackPanel>
+                            <ContentPresenter
+                                    Content="{Binding RelativeSource={RelativeSource AncestorType=local:DialButton}, Path=Content}"
+                                    HorizontalAlignment="Center" />
+                            <TextBlock TextAlignment="Center" FontSize="{DynamicResource double5}"
+                                    Foreground="{DynamicResource PrimaryHueDarkBrush}"
+                                    Text="{Binding RelativeSource={RelativeSource AncestorType=local:DialButton}, Path=Letters}">
+                            </TextBlock>
                         </StackPanel>
                     </Border>
-                </ControlTemplate>
+                </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>

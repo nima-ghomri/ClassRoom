@@ -5,55 +5,10 @@
         DataContext="{StaticResource MainWindowViewModel}" mc:Ignorable="d" Height="450" Width="800" d:Height="500" d:Width="700"
         d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel}">
     <Window.Resources>
-        <!--<Style TargetType="Button" x:Key="RedButton">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="Yellow" />
-                </Trigger>
-            </Style.Triggers>
-            <Setter Property="Foreground" Value="Red" />
-        </Style>
-        <Style TargetType="local:PersonItemView">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Married}" Value="True">
-                    <Setter Property="Background" Value="Green" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>-->
     </Window.Resources>
     <DockPanel>
-        <UniformGrid DockPanel.Dock="Top" Columns="3" Background="Bisque">
-            <local:DialButton Content="1"/>
-            <local:DialButton Content="2" Letters="ABC"/>
-            <local:DialButton Content="2" Letters="DEF"/>
-            <local:DialButton Content="2" Letters="GHI"/>
-            <!--<Button>
-                <StackPanel>
-                    <Label Content="1"/>
-                    <Label Content="*"/>
-                </StackPanel>
-            </Button>
-            <Button>
-                <StackPanel>
-                    <Label Content="2"/>
-                    <Label Content="ABC"/>
-                </StackPanel>
-            </Button>
-            <Button>
-                <StackPanel>
-                    <Label Content="3"/>
-                    <Label Content="DEF"/>
-                </StackPanel>
-            </Button>
-            <Button>
-                <StackPanel>
-                    <Label Content="4"/>
-                    <Label Content="GHI"/>
-                </StackPanel>
-            </Button>-->
-        </UniformGrid>
         <Label DockPanel.Dock="Top" Content="Attached label" local:LabelAttachedProperties.IsHighlighted="True"/>
-        <Button DockPanel.Dock="Top" Content="MyButton" />
+        <Button DockPanel.Dock="Top" Content="Open Dials" Command="{Binding OpenDialCommand}"/>
         <local:PersonItemView DockPanel.Dock="Top" FirstName="Nima"/>
         <Label DockPanel.Dock="Top" Content="{Binding Panel.IsOpen}" local:LabelAttachedProperties.IsHighlighted="True" />
         <local:PanelView DockPanel.Dock="Right" DataContext="{Binding Panel}"/>

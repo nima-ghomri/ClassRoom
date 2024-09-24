@@ -6,7 +6,7 @@
     <Application.Resources>
         <local:MainWindowViewModel x:Key="MainDataContext" />
 
-        <Style TargetType="Button">
+        <!--<Style TargetType="Button">
             <Style.Triggers>
                 <Trigger Property="local:ButtonAttachedProperties.IsHighlighted" Value="True">
                     <Setter Property="Background">
@@ -22,7 +22,7 @@
                         <Path Stroke="Black" Fill="LightBlue" StrokeThickness="2" Width="200" Height="200">
                             <Path.Data>
                                 <GeometryGroup>
-                                    <!-- Define path data directly as Geometry -->
+                                    --><!-- Define path data directly as Geometry --><!--
                                     <PathGeometry Figures="{Binding local:ButtonAttachedProperties.IsHighlighted}" />
                                 </GeometryGroup>
                             </Path.Data>
@@ -31,6 +31,6 @@
                     </StackPanel>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
     </Application.Resources>
 </Application>
